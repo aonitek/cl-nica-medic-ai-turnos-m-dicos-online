@@ -256,7 +256,7 @@
             Contacto
           </a>
 
-          <a href="javascript:void(0)" onclick="event.preventDefault(); if(window.openAgent){window.openAgent()}else if(window.toggleAgent){window.toggleAgent()}else if(window.openChat){window.openChat()}else if(window.voiceflow?.chat?.open){window.voiceflow.chat.open()}else if(window.Intercom){window.Intercom('show')}else if(window.HubSpotConversations?.widget){window.HubSpotConversations.widget.open()}else{alert('Iniciando el asistente de reservas... Si no se abre automáticamente, por favor busque el botón de chat flotante en la esquina inferior derecha.')}" class="bg-cyan-600 hover:bg-cyan-700 text-white px-5 py-3 rounded-xl transition">
+          <a href="https://app.aonitek.com/agents/8232633" target="_blank" class="bg-cyan-600 hover:bg-cyan-700 text-white px-5 py-3 rounded-xl transition">
             Reservar Turno
           </a>
         </nav>
@@ -298,9 +298,9 @@
 
           <div class="mt-10 flex flex-col items-center sm:flex-row sm:justify-center gap-4">
 
-            <button id="btn-sacar-turno" onclick="(() => { if (window.openAgent) { window.openAgent(); } else if (window.toggleAgent) { window.toggleAgent(); } else if (window.openChat) { window.openChat(); } else if (window.voiceflow?.chat) { window.voiceflow.chat.open(); } else if (window.Typebot) { window.Typebot.open(); } else if (window.HubSpotConversations) { window.HubSpotConversations.widget.open(); } else if (window.Tawk_API) { window.Tawk_API.maximize(); } else if (window.LiveChatWidget) { window.LiveChatWidget.call('maximize'); } else if (window.botpressWebChat) { window.botpressWebChat.sendEvent({ type: 'show' }); } else { const selectors = ['#typebot-bubble-button', '.typebot-button', '[class*=chat-button]', '[id*=chat-button]', 'iframe[title*=chat]', 'iframe[src*=chat]', '[aria-label*=chat]']; for (const s of selectors) { const el = document.querySelector(s); if (el) { el.click(); return; } } console.log('No chat widget detected in global scope.'); } })()" class="bg-cyan-500 hover:bg-cyan-600 text-white px-16 py-6 rounded-2xl font-semibold transition text-center cursor-pointer text-xl w-full sm:w-auto transform hover:scale-105 shadow-lg shadow-cyan-500/20">
+            <a href="https://app.aonitek.com/agents/8232633" target="_blank" class="bg-cyan-500 hover:bg-cyan-600 text-white px-16 py-6 rounded-2xl font-semibold transition text-center cursor-pointer text-xl w-full sm:w-auto transform hover:scale-105 shadow-lg shadow-cyan-500/20">
               Sacar Turno
-            </button>
+            </a>
 
           </div>
 
