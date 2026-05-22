@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<!-- BASE:START (managed by Coding Agent — do not edit) -->
+<base href="/cl-nica-medic-ai-turnos-m-dicos-online/">
+<!-- BASE:END -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+
+  
+
+<!-- SEO Meta Tags -->
+<title>Clínica Medic.AI | Agenda tu Consulta Médica Online</title>
+<meta name="description" content="Olvídate de las filas y llamadas. Reserva, consulta y cancela tus turnos médicos online de forma fácil con nuestros 20 profesionales de primer nivel." />
+<meta name="keywords" content="turnos médicos online" />
+<meta property="og:title" content="Clínica Medic.AI | Agenda tu Consulta Médica Online" />
+<meta property="og:description" content="Olvídate de las filas y llamadas. Reserva, consulta y cancela tus turnos médicos online de forma fácil con nuestros 20 profesionales de primer nivel." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Clínica Medic.AI | Agenda tu Consulta Médica Online" />
+<meta name="twitter:description" content="Olvídate de las filas y llamadas. Reserva, consulta y cancela tus turnos médicos online de forma fácil con nuestros 20 profesionales de primer nivel." />
+<!-- End SEO Meta Tags -->
+
+
+<script data-field-replace>
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var fields={};
+  var paramMap={
+    'first_name':'firstName','last_name':'lastName','full_name':'fullName',
+    'email':'email','phone':'phone','company':'company',
+    'city':'city','state':'state','country':'country'
+  };
+  var skipTags={'SCRIPT':1,'STYLE':1,'NOSCRIPT':1,'TEXTAREA':1,'CODE':1,'PRE':1};
+  var hasUrlFields=false;
+  for(var p in paramMap){
+    var v=params.get(p);
+    if(v){fields[paramMap[p]]=v;hasUrlFields=true;}
+  }
+  var contactId=params.get('contact_id');
+  function esc(s){
+    if(!s)return s;
+    var d=document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+  function doReplace(data){
+    var r={};
+    r['{{full_name}}']=esc(((data.firstName||'')+' '+(data.lastName||'')).trim()||((data.fullName||data.name)||''));
+    r['{{first_name}}']=esc(data.firstName||(data.name?data.name.split(' ')[0]:'')||'');
+    r['{{last_name}}']=esc(data.lastName||(data.name&&data.name.indexOf(' ')>-1?data.name.substring(data.name.indexOf(' ')+1):'')||'');
+    r['{{email}}']=esc(data.email||'');
+    r['{{phone}}']=esc(data.phone||'');
+    r['{{company}}']=esc(data.company||'');
+    r['{{city}}']=esc(data.city||'');
+    r['{{state}}']=esc(data.state||'');
+    r['{{country}}']=esc(data.country||'');
+    r['{{date}}']=new Date().toLocaleDateString();
+    r['{{time}}']=new Date().toLocaleTimeString();
+    r['{{location}}']=[data.city,data.state,data.country].filter(Boolean).join(', ');
+    r['{{tracking_id}}']=esc(data.trackingId||'');
+    r['{{lastClickedProduct}}']=esc(data.lastClickedProduct||'');
+    r['{{lastProductClickDate}}']=esc(data.lastProductClickDate||'');
+    r['{{lastClickedProductPrice}}']=esc(data.lastClickedProductPrice||'');
+    r['{{lastClickedProductURL}}']=esc(data.lastClickedProductURL||'');
+    r['{{productsClickedCount}}']=esc(data.productsClickedCount||'0');
+    r['{{ip_address}}']=esc(data.ipAddress||'');
+    r['{{ip}}']=esc(data.ipAddress||'');
+    if(data.customFields){
+      for(var k in data.customFields){
+        r['{{'+k+'}}']=esc(String(data.customFields[k]||''));
+      }
+    }
+    params.forEach(function(v,k){
+      if(!paramMap[k]&&k!=='contact_id'&&k!=='page_id'&&k.indexOf('utm_')!==0){
+        r['{{'+k+'}}']=esc(v);
+      }
+    });
+    var hasValues=false;
+    for(var key in r){if(r[key]){hasValues=true;break;}}
+    if(!hasValues)return;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(n){
+        var p=n.parentNode;
+        if(p&&skipTags[p.nodeName])return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var node;
+    while(node=walker.nextNode()){
+      var txt=node.nodeValue;
+      if(txt&&txt.indexOf('{{')>-1){
+        var changed=txt;
+        for(var ph in r){
+          if(r[ph]&&changed.indexOf(ph)>-1){
+            changed=changed.split(ph).join(r[ph]);
+          }
+        }
+        if(changed!==txt)node.nodeValue=changed;
+      }
+    }
+    var attrs=['value','placeholder','content','alt','title'];
+    attrs.forEach(function(attr){
+      var els=document.querySelectorAll('['+attr+'*="{{"]');
+      for(var i=0;i<els.length;i++){
+        var tag=els[i].tagName;
+        if(skipTags[tag])continue;
+        var val=els[i].getAttribute(attr);
+        if(val){
+          var nv=val;
+          for(var ph in r){
+            if(r[ph]&&nv.indexOf(ph)>-1){
+              nv=nv.split(ph).join(r[ph]);
+            }
+          }
+          if(nv!==val)els[i].setAttribute(attr,nv);
+        }
+      }
+    });
+  }
+  function run(){
+    if(contactId){
+      var xhr=new XMLHttpRequest();
+      xhr.open('GET','https://app.aonitek.com/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=4235');
+      xhr.onload=function(){
+        if(xhr.status===200){
+          try{
+            var resp=JSON.parse(xhr.responseText);
+            if(resp.success&&resp.contact){
+              var merged=resp.contact;
+              for(var k in fields){merged[k]=fields[k];}
+              doReplace(merged);
+              return;
+            }
+          }catch(e){}
+        }
+        if(hasUrlFields)doReplace(fields);
+      };
+      xhr.onerror=function(){if(hasUrlFields)doReplace(fields);};
+      xhr.send();
+    }else if(hasUrlFields){
+      doReplace(fields);
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}
+  else{run();}
+})();
+</script>
+<script data-payment>
+(function(){
+  var slug='kn6mZcQ';
+  var apiBase='https://app.aonitek.com';
+  var successSubtext='';var successBtnLabel='Continue';var successBtnColor='#16a34a';var successRedirect='';
+  function findEmail(){
+    var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
+    var inputs=document.querySelectorAll('input[type="email"],input[name*="email"],input[placeholder*="email"],input[placeholder*="Email"]');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.includes('@'))return inputs[j].value.trim();}
+    return '';
+  }
+  function findName(){
+    var ids=['name','fullName','full-name','buyer-name','buyerName','customer-name','userName','user-name'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value)return el.value.trim();}
+    var inputs=document.querySelectorAll('input[name*="name"]:not([name*="email"]):not([type="email"]),input[placeholder*="name"]:not([placeholder*="email"]):not([type="email"]),input[placeholder*="Name"]:not([type="email"])');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value)return inputs[j].value.trim();}
+    return '';
+  }
+  var __realProcessPayment=function(a,b,c,d,e){
+    var amountCents,email,productName,productDescription,customerName,quantity;
+    if(a&&typeof a==='object'){
+      amountCents=a.amountCents;email=a.email;productName=a.productName;
+      productDescription=a.productDescription||'';customerName=a.name||'';quantity=a.quantity||1;
+    }else{
+      amountCents=typeof a==='number'?a:0;productName=typeof b==='string'?b:'';
+      productDescription=typeof c==='string'?c:'';email='';customerName='';quantity=1;
+    }
+    if(!email)email=findEmail();
+    if(!customerName)customerName=findName();
+    if(!productName){alert('Product name is required.');return Promise.reject('no_product_name');}
+    if(!amountCents||amountCents<100){alert('Amount must be at least $1.00');return Promise.reject('invalid_amount');}
+    if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
+    var successBase=window.location.href.split('?')[0];
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/payment/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,name:customerName,amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process payment');throw new Error(d.error);}
+    });
+  };
+  Object.defineProperty(window,'__processPayment',{value:__realProcessPayment,writable:false,configurable:false});
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('payment')==='success'){
+      var pName=urlParams.get('product')||'your item';
+      var overlay=document.createElement('div');overlay.id='payment-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+      var subTxt=successSubtext||('Thank you for purchasing '+pName+'.');
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">'+esc(subTxt)+'</p><button id="lp-pay-success-btn" style="padding:12px 32px;font-size:16px;font-weight:600;background:'+successBtnColor+';color:white;border:none;border-radius:8px;cursor:pointer;">'+esc(successBtnLabel)+'</button></div>';
+      document.body.appendChild(overlay);
+      var pBtn=document.getElementById('lp-pay-success-btn');
+      if(pBtn){pBtn.addEventListener('click',function(){if(successRedirect){window.location.href=successRedirect;}else{overlay.remove();window.history.replaceState({},'',window.location.pathname);}});}
+    }
+  });
+})();
+</script>  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-white text-slate-700">
+
+  <!-- HEADER -->
+  <header data-section="header" class="w-full fixed top-0 left-0 z-50 bg-white/95 border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-4">
+          <img src="https://app.aonitek.com/api/landing-pages/images/landing-page-images%2F0%2F1779477134046_logo_medicia.png" alt="Medic.AI Logo" class="h-14 w-auto" style="aspect-ratio: 0.9437; object-fit: cover; object-position: center;">
+
+          <div>
+            <h1 class="text-xl font-bold text-slate-800">
+              Medic.AI
+            </h1>
+
+            <p class="text-sm text-slate-500">
+              Tu salud, en el momento justo
+            </p>
+          </div>
+        </div>
+
+        <!-- Desktop Menu -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+          <a href="#especialidades" class="hover:text-cyan-600 transition">
+            Especialidades
+          </a>
+
+          <a href="#obras-sociales" class="hover:text-cyan-600 transition">
+            Coberturas
+          </a>
+
+          <a href="#faq" class="hover:text-cyan-600 transition">
+            FAQ
+          </a>
+
+          <a href="#contacto" class="hover:text-cyan-600 transition">
+            Contacto
+          </a>
+
+          <a href="#" onclick="if(window.openAgent){window.openAgent()}else if(window.toggleAgent){window.toggleAgent()}else if(window.openChat){window.openChat()}" class="bg-cyan-600 hover:bg-cyan-700 text-white px-5 py-3 rounded-xl transition">
+            Reservar Turno
+          </a>
+        </nav>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section data-section="hero" class="relative min-h-screen flex items-center bg-cover bg-center" style="background-image: url('https://app.aonitek.com/api/landing-pages/images/landing-page-images%2F0%2F1779477033734_hero_image.png');">
+
+    <div class="absolute inset-0" style="background: linear-gradient(to right, rgba(7, 16, 29, 0.4), rgba(7, 16, 29, 0.2));"></div>
+
+    <div class="relative z-10 w-full">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+        <div class="max-w-3xl pt-32">
+
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+
+            <span class="text-white text-sm">
+              Atención médica programada
+            </span>
+          </div>
+
+          <h1 class="text-5xl md:text-7xl leading-tight font-bold text-white">
+            Tecnología y medicina
+            <span class="text-cyan-400">
+              en un mismo lugar
+            </span>
+          </h1>
+
+          <p class="mt-8 text-xl text-slate-200 leading-relaxed max-w-2xl">
+            Clínica Medic.AI combina atención profesional,
+            turnos online y una experiencia médica moderna
+            para que puedas cuidar tu salud sin demoras.
+          </p>
+
+          <div class="mt-10 flex flex-col items-center sm:flex-row sm:justify-center gap-4">
+
+            <button id="btn-sacar-turno" onclick="if(window.openAgent){window.openAgent()}else if(window.toggleAgent){window.toggleAgent()}else if(window.openChat){window.openChat()}" class="bg-cyan-500 hover:bg-cyan-600 text-white px-16 py-6 rounded-2xl font-semibold transition text-center cursor-pointer text-xl w-full sm:w-auto transform hover:scale-105 shadow-lg shadow-cyan-500/20">
+              Sacar Turno
+            </button>
+
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mt-16">
+
+            <div class="glass rounded-2xl p-5">
+              <h3 class="text-3xl font-bold text-white">20+</h3>
+              <p class="text-slate-300 text-sm mt-1">
+                Profesionales
+              </p>
+            </div>
+
+            <div class="glass rounded-2xl p-5">
+              <h3 class="text-3xl font-bold text-white">11</h3>
+              <p class="text-slate-300 text-sm mt-1">
+                Especialidades
+              </p>
+            </div>
+
+            <div class="glass rounded-2xl p-5">
+              <h3 class="text-3xl font-bold text-white">100%</h3>
+              <p class="text-slate-300 text-sm mt-1">
+                Atención presencial
+              </p>
+            </div>
+
+            <div class="glass rounded-2xl p-5">
+              <h3 class="text-3xl font-bold text-white">24/7</h3>
+              <p class="text-slate-300 text-sm mt-1">
+                Reserva online
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section data-section="about" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <div>
+          <span class="text-cyan-600 font-semibold uppercase tracking-wider">
+            Sobre Nosotros
+          </span>
+
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mt-4 leading-tight">
+            Medicina moderna,
+            atención humana
+          </h2>
+
+          <p class="mt-8 text-lg text-slate-600 leading-relaxed">
+            Clínica Medic.AI es un centro médico ambulatorio especializado en atención programada,
+            diseñado para ofrecer una experiencia eficiente, accesible y profesional.
+          </p>
+
+          <p class="mt-5 text-lg text-slate-600 leading-relaxed">
+            Nuestro sistema digital de turnos permite reservar, consultar y cancelar
+            turnos online sin filas ni llamadas innecesarias.
+          </p>
+
+          <div class="mt-10 grid sm:grid-cols-2 gap-5">
+
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+              <h4 class="font-semibold text-slate-800 mb-2">
+                Instalaciones modernas
+              </h4>
+
+              <p class="text-sm text-slate-600">
+                Sala climatizada, WiFi gratuito, accesibilidad y estacionamiento propio.
+              </p>
+            </div>
+
+            <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+              <h4 class="font-semibold text-slate-800 mb-2">
+                Atención eficiente
+              </h4>
+
+              <p class="text-sm text-slate-600">
+                Recordatorios automáticos y gestión rápida de turnos.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="bg-slate-100 rounded-3xl p-8">
+
+          <div class="space-y-6">
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+              <h4 class="font-semibold text-slate-800 mb-2">
+                Horarios de atención
+              </h4>
+
+              <p class="text-slate-600">
+                Lunes a Viernes: 07:30 a 20:00
+              </p>
+
+              <p class="text-slate-600">
+                Sábados: 08:00 a 14:00
+              </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+              <h4 class="font-semibold text-slate-800 mb-2">
+                Dirección
+              </h4>
+
+              <p class="text-slate-600">
+                Av. Corrientes 3241, Piso 2,
+                CABA, Buenos Aires
+              </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-sm">
+              <h4 class="font-semibold text-slate-800 mb-2">
+                Contacto
+              </h4>
+
+              <p class="text-slate-600">
+                (011) 4832-7700
+              </p>
+
+              <p class="text-slate-600">
+                turnos@medicai.com.ar
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section data-section="specialties" id="especialidades" class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto">
+
+        <span class="text-cyan-600 font-semibold uppercase tracking-wider">
+          Especialidades
+        </span>
+
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mt-4">
+          Profesionales especializados
+        </h2>
+
+        <p class="mt-6 text-lg text-slate-600">
+          Contamos con un equipo médico multidisciplinario
+          enfocado en brindar atención de calidad.
+        </p>
+
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+
+        <div class="bg-white p-7 rounded-3xl border border-slate-100">
+          <h3 class="text-xl font-semibold text-slate-800">
+            Cardiología
+          </h3>
+          <p class="mt-3 text-slate-600">
+            Evaluación cardiovascular y control clínico.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-slate-100">
+          <h3 class="text-xl font-semibold text-slate-800">
+            Pediatría
+          </h3>
+          <p class="mt-3 text-slate-600">
+            Atención integral para niños y adolescentes.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-slate-100">
+          <h3 class="text-xl font-semibold text-slate-800">
+            Ginecología
+          </h3>
+          <p class="mt-3 text-slate-600">
+            Consultas y seguimiento ginecológico.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-slate-100">
+          <h3 class="text-xl font-semibold text-slate-800">
+            Traumatología
+          </h3>
+          <p class="mt-3 text-slate-600">
+            Diagnóstico y tratamiento osteomuscular.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-slate-100">
+          <h3 class="text-xl font-semibold text-slate-800">
+            Dermatología
+          </h3>
+          <p class="mt-3 text-slate-600">
+            Salud y cuidado integral de la piel.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-3xl border border-slate-100">
+          <h3 class="text-xl font-semibold text-slate-800">
+            Neurología
+          </h3>
+          <p class="mt-3 text-slate-600">
+            Evaluación neurológica especializada.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OBRAS SOCIALES -->
+  <section data-section="coverages" id="obras-sociales" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto">
+
+        <span class="text-cyan-600 font-semibold uppercase tracking-wider">
+          Coberturas
+        </span>
+
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mt-4">
+          Obras sociales y prepagas
+        </h2>
+
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-16">
+
+        <div class="bg-slate-50 rounded-2xl p-5 text-center font-medium">
+          OSDE
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 text-center font-medium">
+          Swiss Medical
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 text-center font-medium">
+          Galeno
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 text-center font-medium">
+          PAMI
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 text-center font-medium">
+          Medifé
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 text-center font-medium">
+          Accord Salud
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 text-center font-medium">
+          IOMA
+        </div>
+
+        <div class="bg-slate-50 rounded-2xl p-5 text-center font-medium">
+          OSECAC
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TURNOS -->
+  <section data-section="booking" id="turnos" class="hidden" style="display: none;">
+    <!-- WIDGET LOADED SILENTLY -->
+    <script src="https://app.aonitek.com/widget.js" data-widget="8232633" async="">
+    </script>
+  </section>
+
+  <!-- FAQ -->
+  <section data-section="faq" id="faq" class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-6 lg:px-8">
+
+      <div class="text-center">
+
+        <span class="text-cyan-600 font-semibold uppercase tracking-wider">
+          Preguntas frecuentes
+        </span>
+
+        <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mt-4">
+          Información útil para pacientes
+        </h2>
+
+      </div>
+
+      <div class="mt-16 space-y-5">
+
+        <div class="border border-slate-200 rounded-2xl p-6">
+          <h3 class="font-semibold text-slate-800">
+            ¿Atienden mi obra social?
+          </h3>
+
+          <p class="mt-3 text-slate-600">
+            Trabajamos con las principales obras sociales y prepagas del país.
+          </p>
+        </div>
+
+        <div class="border border-slate-200 rounded-2xl p-6">
+          <h3 class="font-semibold text-slate-800">
+            ¿Los turnos son virtuales?
+          </h3>
+
+          <p class="mt-3 text-slate-600">
+            Actualmente las consultas son únicamente presenciales.
+          </p>
+        </div>
+
+        <div class="border border-slate-200 rounded-2xl p-6">
+          <h3 class="font-semibold text-slate-800">
+            ¿Cómo puedo cancelar o reprogramar?
+          </h3>
+
+          <p class="mt-3 text-slate-600">
+            Por WhatsApp o mediante el chat web con al menos 2 horas de anticipación.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section data-section="contact" id="contacto" class="py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="grid lg:grid-cols-2 gap-16">
+
+        <div>
+
+          <span class="text-cyan-600 font-semibold uppercase tracking-wider">
+            Contacto
+          </span>
+
+          <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mt-4">
+            Estamos para ayudarte
+          </h2>
+
+          <div class="mt-10 space-y-6">
+
+            <div>
+              <h4 class="font-semibold text-slate-800">
+                Dirección
+              </h4>
+
+              <p class="text-slate-600 mt-2">
+                Av. Corrientes 3241, Piso 2,
+                CABA, Buenos Aires
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-slate-800">
+                Teléfono
+              </h4>
+
+              <p class="text-slate-600 mt-2">
+                (011) 4832-7700
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-slate-800">
+                WhatsApp
+              </h4>
+
+              <p class="text-slate-600 mt-2">
+                +54 9 11 5823-4400
+              </p>
+            </div>
+
+            <div>
+              <h4 class="font-semibold text-slate-800">
+                Email
+              </h4>
+
+              <p class="text-slate-600 mt-2">
+                turnos@medicai.com.ar
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- MAP -->
+        <div class="rounded-3xl overflow-hidden min-h-[400px] shadow-sm">
+
+          <iframe src="https://maps.google.com/maps?q=Av.%20Corrientes%203241%20Buenos%20Aires&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+          </iframe>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-section="footer" class="bg-slate-950 py-10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+      <div class="flex flex-col md:flex-row justify-between items-center gap-5">
+
+        <div class="flex items-center gap-4">
+
+          <tylemg src="logo_medicia.png" alt="Medic.AI" class="h-12">
+
+          <div>
+            <h3 class="text-white font-semibold">
+              Clínica Medic.AI
+            </h3>
+
+            <p class="text-slate-400 text-sm">
+              Tu salud, en el momento justo
+            </p>
+          </div>
+
+        </tylemg></div>
+
+        <p class="text-slate-500 text-sm text-center md:text-right">
+          © Los datos, direcciones, marcas y fotografías son ficticios y fueron generados a efectos de esta demostración.</p>
+
+      </div>
+
+    </div>
+  </footer>
+
+
+  <script src="script.js"></script>
+</body></html>
